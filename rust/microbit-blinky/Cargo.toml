@@ -1,0 +1,21 @@
+[package]
+authors = ["Ted Havelka"]
+edition = "2021"
+name = "microbit-blinky"
+version = "0.1.0"
+
+[dependencies]
+cortex-m-rt = "0.7.3"
+panic-halt = "0.2.0"
+microbit-v2 = "0.13.0"
+
+[[bin]]
+name = "blinky"
+path = "src/main.rs"
+test = false
+bench = false
+
+[profile.release]
+codegen-units = 1
+debug = true
+lto = true
