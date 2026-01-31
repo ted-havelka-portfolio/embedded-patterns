@@ -1,0 +1,71 @@
+
+
+https://docs.rust-embedded.org/panic-semihosting/src/cortex_m/register/basepri.rs.html
+
+
+Build errors:
+
+```
+ted@zakia:~/projects/embedded-patterns/rust/mb2-hello-world$ cargo embed --example send-byte
+   Compiling cortex-m v0.7.7
+error: could not compile `cortex-m` (lib) due to 6 previous errors
+error[E0425]: cannot find function `__basepri_r` in module `crate::asm::inline`
+  --> /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/register/basepri.rs:6:15
+   |
+ 6 |     call_asm!(__basepri_r() -> u8)
+   |               ^^^^^^^^^^^ not found in `crate::asm::inline`
+   |
+  ::: /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/call_asm.rs:11:43
+   |
+11 |                 () => crate::asm::inline::$func($($args),*),
+   |                                           ----- due to this macro variable
+
+error[E0425]: cannot find function `__basepri_w` in module `crate::asm::inline`
+  --> /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/register/basepri.rs:22:19
+   |
+22 |         call_asm!(__basepri_w(basepri: u8));
+   |                   ^^^^^^^^^^^ not found in `crate::asm::inline`
+   |
+  ::: /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/call_asm.rs:11:43
+   |
+11 |                 () => crate::asm::inline::$func($($args),*),
+   |                                           ----- due to this macro variable
+error[E0425]: cannot find function `__basepri_max` in module `crate::asm::inline`
+  --> /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/register/basepri_max.rs:19:19
+   |
+19 |         call_asm!(__basepri_max(basepri: u8));
+   |                   ^^^^^^^^^^^^^ not found in `crate::asm::inline`
+   |
+  ::: /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/call_asm.rs:11:43
+   |
+11 |                 () => crate::asm::inline::$func($($args),*),
+   |                                           ----- due to this macro variable
+
+error[E0425]: cannot find function `__faultmask_r` in module `crate::asm::inline`
+  --> /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/register/faultmask.rs:29:28
+   |
+29 |     let r: u32 = call_asm!(__faultmask_r() -> u32);
+   |                            ^^^^^^^^^^^^^ not found in `crate::asm::inline`
+   |
+  ::: /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/call_asm.rs:11:43
+   |
+11 |                 () => crate::asm::inline::$func($($args),*),
+   |                                           ----- due to this macro variable
+
+error: invalid register `r0`: unknown register
+   --> /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/../asm/inline.rs:197:24
+    |
+197 |     asm!("bkpt #0xab", inout("r0") nr, in("r1") arg, options(nomem, nostack, preserves_flags));
+    |                        ^^^^^^^^^^^^^^
+
+error: invalid register `r1`: unknown register
+   --> /home/ted/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cortex-m-0.7.7/src/../asm/inline.rs:197:40
+    |
+197 |     asm!("bkpt #0xab", inout("r0") nr, in("r1") arg, options(nomem, nostack, preserves_flags));
+    |                                        ^^^^^^^^^^^^
+
+For more information about this error, try `rustc --explain E0425`.
+       Error Failed to run cargo build: exit code = Some(101).
+ted@zakia:~/projects/embedded-patterns/rust/mb2-hello-world$
+
+```
