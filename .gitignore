@@ -1,0 +1,9 @@
+# dot gitingore file for Rust work CS571
+# References to .gitignore construction and use:
+# (1) https://gist.github.com/jstnlvns/ebaa046fae16543cc9efc7f24bcd0e31
+
+# Ignore symlinks to local sample apps:
+[0-9][0-9][0-9]-*
+
+# Ignore build artifacts which don't need to be tracked:
+**/target
