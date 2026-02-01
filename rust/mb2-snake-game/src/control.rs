@@ -1,3 +1,6 @@
+// This source copied from
+// *  https://github.com/rust-embedded/discovery/blob/master/microbit/src/11-snake-game/src/control.rs
+
 use core::cell::RefCell;
 use cortex_m::interrupt::Mutex;
 use microbit::hal::gpiote::Gpiote;
